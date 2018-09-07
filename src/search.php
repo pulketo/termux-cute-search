@@ -36,7 +36,7 @@ DEFINE("MAN", "
 		global $opts, $argSearch;
 		$where = ($opts['onterminal']===true)?"terminal":"default";
 		$out = array("action"=>"search", "where"=>"$where", "search"=>explode("+", $argSearch) ); 
-		print_r($out);
+		echo json_encode($out, JSON_PRETTY_PRINT);
 	}
 
 	$opts->option('m')->aka('man')->describedAs(MAN)->boolean()->defaultsTo(false);
@@ -59,9 +59,15 @@ DEFINE("MAN", "
 		// echo "$i:".$opts[$i].PHP_EOL;
 		$numArgs=$i+1;
 	}
+	if ($numArgs==0){
+		echo "You have to search something ... try some keywords after the command";
+		fwrite(STDERR, PHP_EOL);
+		exit(5);
+	}
 	$argSearch = trim($argSearch, "+ ");
 	if ($opts['man'] === true){
 		echo MAN;
+		fwrite(STDERR, PHP_EOL);
 		exit(0);
 	}
 //////
