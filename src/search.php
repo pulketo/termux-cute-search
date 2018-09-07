@@ -39,8 +39,17 @@ DEFINE("MAN", "
 		echo json_encode($out, JSON_PRETTY_PRINT);
 	}
 
+	function exeout($cmd){
+		global $opts, $argSearch;
+		$where = ($opts['onterminal']===true)?"terminal":"default";
+		$exe = trim([`$cmd && echo OK || echo NOK`]);
+		$out = array("action"=>"search", "where"=>"$where", "search"=>explode("+", $argSearch), "cmd"=>"$cmd", "exe"=>"$exe" ); 
+		echo json_encode($out, JSON_PRETTY_PRINT);
+		exit(0); //temp
+	}
+
 	$opts->option('m')->aka('man')->describedAs(MAN)->boolean()->defaultsTo(false);
-	$opts->option('p')->aka('Playstore')->describedAs('Search the play store for keywords')->boolean()->defaultsTo(false);
+	$opts->option('p')->aka('playstore')->describedAs('Search the play store for keywords')->boolean()->defaultsTo(false);
 	$opts->option('x')->aka('searxme')->describedAs('use searx.me for keywords')->boolean()->defaultsTo(false);
 	$opts->option('g')->aka('google')->describedAs('Search google for keywords')->boolean()->defaultsTo(false);
 	$opts->option('n')->aka('hackernews')->describedAs('Search Hacker News for keywords')->boolean()->defaultsTo(false);
@@ -103,18 +112,15 @@ DEFINE("MAN", "
 		// normal behavior
 		if ($opts['google'] === true){
 			$cmd = "termux-open 'https://www.google.com/search?q=$argSearch'";
-			$exe = trim(`$cmd`);
-			exit(0);
+			exeout($cmd);
 		}		
 		if ($opts['playstore'] === true){
 			$cmd = "termux-open 'http://play.google.com/store/search?q=$argSearch&c=apps'";
-			$exe = trim(`$cmd`);
-			exit(0);
+			exeout($cmd);
 		}
 		if ($opts['hackernews'] === true){
 			$cmd = "termux-open 'https://hn.algolia.com/?sort=byPopularity&prefix&page=0&dateRange=all&type=story&query=$argSearch'";
-			$exe = trim(`$cmd`);
-			exit(0);
+			exeout($cmd);
 		}
 		if ($opts['piratebay'] === true){
 			$o.="insecure search on javascript enabled browser...exiting";
@@ -128,7 +134,7 @@ DEFINE("MAN", "
 		// if ($opts['searxme'] === true) // this is default
 		{
 			$cmd = "termux-open 'https://searx.me/search?q=$argSearch'";						
-			$exe = trim(`$cmd`);
+			exeout($cmd);
 			exit(0);
 		}		
 	}
