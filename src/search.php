@@ -104,14 +104,17 @@ DEFINE("MAN", "
 		if ($opts['google'] === true){
 			$cmd = "termux-open 'https://www.google.com/search?q=$argSearch'";
 			$exe = trim(`$cmd`);
+			exit(0);
 		}		
 		if ($opts['playstore'] === true){
 			$cmd = "termux-open 'http://play.google.com/store/search?q=$argSearch&c=apps'";
 			$exe = trim(`$cmd`);
+			exit(0);
 		}
 		if ($opts['hackernews'] === true){
 			$cmd = "termux-open 'https://hn.algolia.com/?sort=byPopularity&prefix&page=0&dateRange=all&type=story&query=$argSearch'";
 			$exe = trim(`$cmd`);
+			exit(0);
 		}
 		if ($opts['piratebay'] === true){
 			$o.="insecure search on javascript enabled browser...exiting";
@@ -126,6 +129,7 @@ DEFINE("MAN", "
 		{
 			$cmd = "termux-open 'https://searx.me/search?q=$argSearch'";						
 			$exe = trim(`$cmd`);
+			exit(0);
 		}		
 	}
 
