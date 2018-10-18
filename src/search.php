@@ -52,6 +52,7 @@ DEFINE("MAN", "
 	$opts->option('p')->aka('playstore')->describedAs('Search the play store for keywords')->boolean()->defaultsTo(false);
 	$opts->option('x')->aka('searxme')->describedAs('use searx.me for keywords')->boolean()->defaultsTo(false);
 	$opts->option('g')->aka('google')->describedAs('Search google for keywords')->boolean()->defaultsTo(false);
+	$opts->option('d')->aka('duck')->describedAs('Search duck duck go for keywords')->boolean()->defaultsTo(false);
 	$opts->option('n')->aka('hackernews')->describedAs('Search Hacker News for keywords')->boolean()->defaultsTo(false);
 	$opts->option('b')->aka('piratebay')->describedAs('Search the Pirate Bay (always on terminal)')->boolean()->defaultsTo(false);
 	$opts->option('y')->aka('yts')->describedAs('Search YTS (always on terminal)')->boolean()->defaultsTo(false);
@@ -112,6 +113,14 @@ DEFINE("MAN", "
 		// normal behavior
 		if ($opts['google'] === true){
 			$cmd = "termux-open 'https://www.google.com/search?q=$argSearch'";
+			exeout($cmd);
+		}		
+		if ($opts['duck'] === true){
+			$cmd = "termux-open 'https://www.duckduckgo.com/?q=$argSearch'";
+			exeout($cmd);
+		}		
+		if ($opts['searx'] === true){
+			$cmd = "termux-open 'https://searx.me/search?q=$argSearch'";
 			exeout($cmd);
 		}		
 		if ($opts['playstore'] === true){
