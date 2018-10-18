@@ -35,7 +35,7 @@
 			return $o;
 		}
 		public function duckduckgo($num=10, $start=0, $ssl=true, $json=true){
-			$o = $this->sURI("api.duckduckgo.com/?q=", $this->query, "&format=json&n=$num&s=$start", $ssl);
+			$o = $this->sURI("api.duckduckgo.com/?q=", $this->query, "&format=json&n=$num&s=$start&t=termux-cute-search-dev", $ssl);
 			return $o;
 		}
 
