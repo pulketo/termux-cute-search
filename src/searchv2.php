@@ -38,6 +38,10 @@
 			$o = $this->sURI("api.duckduckgo.com/?q=", $this->query, "&format=json&n=$num&s=$start&t=termux-cute-search-dev", $ssl);
 			return $o;
 		}
+		public function searxme($num=10, $start=0, $ssl=true, $json=true){
+			$o = $this->sURI("searx.me/search?q=", $this->query, "&pageno=$page&safesearch=None&format=json", $ssl);
+			return $o;
+		}
 
 		private function sURI($uri, $query, $opts=null, $ssl=true){
 			if (strlen ($this->query) < 2)
@@ -78,9 +82,9 @@ DEFINE("MAN", "
 	$mySearch = new termuxSearch();
 	$mySearch->addSearchTerms("hola");
 	$mySearch->addSearchTerms("php");
-	$t[] = $mySearch->google();
-	$t[] = $mySearch->duckduckgo();
-	print_r($t);
+//	$t[] = $mySearch->google();
+	$t = $mySearch->searxme();
+	$c = `termux-open $t`;
 
 exit;
 	require __DIR__ ."/../vendor/autoload.php";
