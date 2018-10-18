@@ -40,7 +40,7 @@
 		}
 		public function searxme($num=10, $start=0, $ssl=true){
 			$page = ($start / $num) + 1;
-			$o = $this->sURI("searx.me/search?q=", $this->query, "&pageno=$page&safesearch=None", $ssl);
+			$o = $this->sURI("searx.me/search?q=", $this->query, "&pageno=$page", $ssl);
 			return $o;
 		}
 		public function playstore($num=10, $start=0, $ssl=true){
